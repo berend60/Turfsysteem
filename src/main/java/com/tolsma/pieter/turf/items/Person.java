@@ -78,4 +78,15 @@ public class Person {
 	public void setBalance(float amount) {
 		this.balance = amount;
 	}
+
+	public boolean equals(Object other) {
+	    if (other instanceof Person) {
+	        Person otherP = (Person) other;
+	        if (otherP.getId().equals(this.id)) {
+	            return true;
+            }
+            return false;
+        }
+	    return false;
+    }
 }

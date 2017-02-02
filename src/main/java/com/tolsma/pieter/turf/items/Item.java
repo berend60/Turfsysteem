@@ -68,4 +68,14 @@ public class Item {
 		return available;
 	}
 
+	public boolean equals(Object object) {
+	    if (object instanceof Item) {
+	        Item other = (Item) object;
+	        if (other.getId().equals(this.id)) {
+	            return true;
+            }
+            return false;
+        }
+        return false;
+    }
 }

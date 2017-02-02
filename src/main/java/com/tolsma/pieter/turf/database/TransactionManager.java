@@ -30,13 +30,21 @@ public class TransactionManager {
 
 	private ArrayList<Transaction> transactions;
 
-	public TransactionManager() {
+	/**
+	 * Private constructor of this class.
+	 * Initiated once.
+	 */
+	private TransactionManager() {
 		File dir = new File(file_dir);
 		if (!dir.exists()) {
 			dir.mkdir();
 		}
 	}
 
+	/**
+	 * Read the transactions of the current week
+	 * and store them in the transactions variable.
+	 */
 	public void init() {
 		transactions = readFromFile(new Date());
 	}
@@ -48,7 +56,13 @@ public class TransactionManager {
 	public ArrayList<Transaction> getTransactions() {
 		return transactions;
 	}
-	
+
+	/**
+	 * Returns a list of transactions that occurred in the week of
+	 * the given date.
+	 * @param date the data in the week you want the transactions of.
+	 * @return list of transactions in that week.
+	 */
 	public ArrayList<Transaction> getTransactionsAt(Date date) {
 		ArrayList<Transaction> result = readFromFile(date);
 		
@@ -63,7 +77,11 @@ public class TransactionManager {
 		
 		return result;
 	}
-	
+
+	/**
+	 * Removes a specific transaction from the memory.
+	 * @param transactionId UUID of the transaction you want to remove.
+	 */
 	public void removeTransaction(UUID transactionId) {
 		Iterator<Transaction> it = transactions.iterator();
 		while(it.hasNext()) {
@@ -77,6 +95,10 @@ public class TransactionManager {
 		}
 	}
 
+	/**
+	 * Writes the current memory of transactions to the weekly file.
+	 * @param newList the new list of transactions you want to overwrite.
+	 */
 	public void save(ArrayList<Transaction> newList) {
 		JSONObject main = new JSONObject();
 		JSONArray transactionsArray = new JSONArray();
@@ -171,6 +193,7 @@ public class TransactionManager {
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 		}
+		transactions = results;
 		return results;
 	}
 }
