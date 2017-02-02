@@ -125,7 +125,12 @@ public class TransactionManager {
 		transactions.add(0, trans);
 		save();
 	}
-	
+
+	/**
+	 * Parses date to filepath
+	 * @param date
+	 * @return filepath in the format WEEK_YEAR.json
+	 */
 	public String getFilePath(Date date) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
@@ -145,11 +150,17 @@ public class TransactionManager {
 		return results;
 	}
 
+	/**
+	 * Returns all the transactions from a given week
+	 * @param date date in the week you want the transactions of
+	 * @return list of all transactions
+	 */
 	private ArrayList<Transaction> readFromFile(Date date) {
 		ArrayList<Transaction> results = new ArrayList<>();
 		JSONParser parser = new JSONParser();
 		String filePath = getFilePath(date);
 
+		// Check if the file exists, else create one.
 		File file = new File(filePath);
 		if (!file.exists()) {
 			try {
@@ -158,11 +169,13 @@ public class TransactionManager {
 				FileWriter writer = new FileWriter(file);
 				writer.write(obj.toJSONString());
 				writer.close();
+				return results;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 
+		// Start reading from the week-file.
 		try (FileReader reader = new FileReader(file)) {
 			Object obj = parser.parse(reader);
 			JSONObject jsonObject = (JSONObject) obj;
