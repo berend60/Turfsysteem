@@ -7,3 +7,7 @@ with consumables such as beer, soda, etc. Keeping track of who consumes what was
 done with pen and paper for decades. Converting this into everyones balance was
 very tedious and it was easy to make mistakes. This digital program makes it a lot easier
 to keep track of our inventory!
+
+## Preview
+The program runs on an old computer connected to a touchscreen monitor.
+![preview1](meta/img/preview1.png "Preview 1")
