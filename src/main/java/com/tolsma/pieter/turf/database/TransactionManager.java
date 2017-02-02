@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.UUID;
 
+import com.tolsma.pieter.turf.util.DateHelper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -143,7 +144,7 @@ public class TransactionManager {
 		Iterator<Transaction> it = results.iterator();
 		while(it.hasNext()) {
 			Transaction trans = it.next();
-			if (!trans.getItem().getCategory().equals(itemCategory) || !trans.getParticipants().contains(person)) {
+			if (!trans.getItem().getCategory().equals(itemCategory) || !trans.getParticipants().contains(person) || !DateHelper.isInTimeslot(date, trans.getDate())) {
 				it.remove();
 			}
 		}

@@ -36,14 +36,15 @@ public class Person {
 		
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(startDate);
-		
-		for (int i = 0; i < DateHelper.daysBetween(startDate, endDate); i++) {
-			cal.add(Calendar.DATE, +i);
+
+		int daysBetween = DateHelper.daysBetween(startDate, endDate);
+		for (int i = 0; i < daysBetween; i++) {
 			ArrayList<Transaction> res = TransactionManager.getInstance().getSpecificTransactions(cal.getTime(), this, itemCategory);
 			for (Transaction t : res) {
 				int amount = t.getCount() / t.getParticipants().size();
-				count+= amount;
+				count += amount;
 			}
+            cal.add(Calendar.DATE, 1);
 		}
 		
 		return count;

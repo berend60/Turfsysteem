@@ -140,16 +140,24 @@ public class StatisticsPanel extends JPanel{
 		yearlyButton.setBackground(Constants.TURQUOISE);
 		
 		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		//Set the end time to 8 AM in the morning
+        //Check whether the day should be incremented as well
+		if (cal.get(Calendar.HOUR_OF_DAY) > 7) {
+		    cal.add(Calendar.DATE, 1);
+        }
+        cal.set(Calendar.HOUR_OF_DAY, 8);
+        cal.set(Calendar.MINUTE, 0);
+        endDate = cal.getTime();
 		
 		switch (mode) {
 		case DAILY:
 			dailyButton.setBackground(Constants.TURQUOISE_HIGHLIGHT);
-			startDate = endDate;
+			cal.add(Calendar.DATE, -1);
+			startDate = cal.getTime();
 			break;
 		case MONTHLY:
-			cal.setTime(endDate);
-			cal.set(Calendar.DATE, 1);
-			cal.set(Calendar.HOUR_OF_DAY, 1);
+		    cal.set(Calendar.DAY_OF_MONTH, 1);
 			startDate = cal.getTime();
 			monthlyButton.setBackground(Constants.TURQUOISE_HIGHLIGHT);
 			break;
