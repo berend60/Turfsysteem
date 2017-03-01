@@ -25,6 +25,12 @@ public class PersonListPanel extends JPanel {
 	public final static Color LIGHT_BLUE = new Color(52, 152, 219);
 	public final static Font FONT = new Font("Arial", Font.BOLD, 20);
 
+	private final int MAX_PERSONS_SHOWN = 11;
+	private int activePage, pageCapacity;
+	private ArrayList<Person> persons;
+
+	private JButton prevButton, nextButton;
+
 	public PersonListPanel() {
 
 		this.setOpaque(true);
@@ -32,6 +38,41 @@ public class PersonListPanel extends JPanel {
 		this.setBackground(Constants.GREEN);
 
 		this.setLayout(new GridLayout(4, 4));
+
+        persons = PersonManager.getInstance().getPersons();
+        activePage = 0;
+        pageCapacity = (int) Math.ceil(persons.size() / MAX_PERSONS_SHOWN);
+
+        prevButton = new JButton("Prev");
+        nextButton = new JButton("Next");
+
+        prevButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (activePage > 0) activePage--;
+                update();
+            }
+        });
+
+        nextButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (activePage < pageCapacity) activePage++;
+                update();
+            }
+        });
+
+        prevButton.setBorder(new LineBorder(this.LIGHT_BLUE, 2));
+        prevButton.setFont(this.FONT);
+        prevButton.setBackground(BottomPanel.RED);
+        prevButton.setForeground(Color.WHITE);
+        prevButton.setOpaque(true);
+        nextButton.setBorder(new LineBorder(this.LIGHT_BLUE, 2));
+        nextButton.setBackground(BottomPanel.RED);
+        nextButton.setOpaque(true);
+        nextButton.setFont(this.FONT);
+        nextButton.setForeground(Color.WHITE);
+
 		update();
 		this.revalidate();
 	}
@@ -46,7 +87,13 @@ public class PersonListPanel extends JPanel {
 	
 	public void update() {
 		this.removeAll();
-		for (Person person : PersonManager.getInstance().getPersons()) {
+
+		int startIndex = activePage * MAX_PERSONS_SHOWN;
+		int endIndex = startIndex + MAX_PERSONS_SHOWN;
+
+		for (int i = startIndex; i < endIndex; i++) {
+		    if (i >= persons.size()) break;
+		    Person person = persons.get(i);
 			JButton personButton = new JButton("<html>" + person.getName() + "</html>");
 			personButton.setForeground(Color.WHITE);
 			personButton.setOpaque(true);
@@ -64,6 +111,9 @@ public class PersonListPanel extends JPanel {
 			add(personButton);
 			buttons.add(personButton);
 		}
+
+		if (activePage > 0) add(prevButton);
+		if (activePage < pageCapacity) add(nextButton);
 
 		this.revalidate();
 		this.repaint();
