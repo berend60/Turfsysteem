@@ -84,27 +84,33 @@ public class TransactionManager {
 	 * @param transactionId UUID of the transaction you want to remove.
 	 */
 	public void removeTransaction(UUID transactionId) {
+	    transactions = readFromFile(new Date());
 		Iterator<Transaction> it = transactions.iterator();
 		while(it.hasNext()) {
 			Transaction t = it.next();
 			if (t.getId().equals(transactionId)) {
 				ItemManager.getInstance().getItem(t.getItem().getId()).subtractStock(-t.getCount());
 				it.remove();
-				save();
+				overwriteFile();
 				return;
 			}
 		}
 	}
 
+	public void writeTransaction(Transaction trans) {
+	    transactions = readFromFile(new Date());
+	    transactions.add(trans);
+	    overwriteFile();
+    }
+
 	/**
 	 * Writes the current memory of transactions to the weekly file.
-	 * @param newList the new list of transactions you want to overwrite.
 	 */
-	public void save(ArrayList<Transaction> newList) {
+	public void overwriteFile() {
 		JSONObject main = new JSONObject();
 		JSONArray transactionsArray = new JSONArray();
-
-		for (Transaction t : newList) {
+		System.out.println("Saving file for " + transactions.size() + " transactions");
+		for (Transaction t : transactions) {
 			transactionsArray.add(t.getTransactionJSON());
 		}
 
@@ -118,13 +124,8 @@ public class TransactionManager {
 		}
 	}
 
-	public void save() {
-		save(transactions);
-	}
-
 	public void addTransaction(Transaction trans) {
-		transactions.add(0, trans);
-		save();
+		writeTransaction(trans);
 	}
 
 	/**

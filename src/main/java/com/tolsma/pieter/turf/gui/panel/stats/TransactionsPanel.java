@@ -46,7 +46,8 @@ public class TransactionsPanel extends JPanel {
 		this.mainFrame = mainFrame;
 		this.setLayout(new BorderLayout());
 		scrollPane = new JScrollPane();
-		
+		scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+
 		northContainer = new JPanel();
 		northContainer.setLayout(new GridLayout(1, 3));
 		northContainer.setPreferredSize(new Dimension(northContainer.getPreferredSize().width, 80));

@@ -67,7 +67,7 @@ public class PersonManager {
 			e.printStackTrace();
 		}
 		
-		this.persons = readFromFile();
+		this.persons = newList;
 	}
 	
 	public void save() {
@@ -103,7 +103,7 @@ public class PersonManager {
 	}
 
 	public void deselectAllPersons() {
-		for (Person p : getSelectedPersons()) {
+		for (Person p : persons) {
 			p.setSelected(false);
 		}
 	}
