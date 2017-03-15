@@ -44,7 +44,7 @@ public class PersonManager {
 	}
 
 	public ArrayList<Person> getPersons() {
-		return persons;
+		return readFromFile();
 	}
 	
 	public void save(ArrayList<Person> newList) {
@@ -74,15 +74,13 @@ public class PersonManager {
 		save(persons);
 	}
 	
-	public SortedSet<Map.Entry<Person, Integer>> getOrderedConsumption(Date startDate, Date endDate, Category itemCategory) {
+	public HashMap<Person, Integer> getOrderedConsumption(Date startDate, Date endDate, Category itemCategory) {
 		Map<Person, Integer> tree = new HashMap<Person, Integer>();
-		
 		for (Person p : this.getPersons()) {
 			int count = p.getConsumptionAmount(startDate, endDate, itemCategory);
 			tree.put(p, count);
 		}
-		
-		return (SortedSet<Map.Entry<Person, Integer>>) DateHelper.entriesSortedByValues(tree);
+		return (HashMap<Person, Integer>) DateHelper.entriesSortedByValues(tree);
 	}
 
 	public Person getPerson(UUID id) {

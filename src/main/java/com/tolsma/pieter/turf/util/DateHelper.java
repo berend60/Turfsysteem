@@ -1,7 +1,8 @@
 package com.tolsma.pieter.turf.util;
 
+import com.tolsma.pieter.turf.items.Person;
+
 import java.util.*;
-import java.util.Map.Entry;
 
 public class DateHelper {
 	
@@ -32,16 +33,21 @@ public class DateHelper {
         return false;
     }
 	
-	public static <Person, Integer extends Comparable<? super Integer>> SortedSet<Map.Entry<Person,Integer>> entriesSortedByValues(Map<Person, Integer> map) {
-		SortedSet<Map.Entry<Person, Integer>> sortedEntries = new TreeSet<Map.Entry<Person, Integer>>(
-				new Comparator<Map.Entry<Person, Integer>>() {
-					@Override
-					public int compare(Entry<Person, Integer> o1, Entry<Person, Integer> o2) {
-						int res =  o2.getValue().compareTo(o1.getValue());
-						return res;
-					}
-				});
-		sortedEntries.addAll(map.entrySet());
-		return sortedEntries;
+	public static HashMap<Person, Integer> entriesSortedByValues(Map<Person, Integer> map) {
+		List<Map.Entry<Person, Integer>> list = new LinkedList<>(map.entrySet());
+        Collections.sort( list, new Comparator<Map.Entry<Person, Integer>>()
+        {
+            @Override
+            public int compare( Map.Entry<Person, Integer> o1, Map.Entry<Person, Integer> o2 )
+            {
+                return ( o2.getValue() ).compareTo( o1.getValue() );
+            }
+        } );
+        HashMap<Person, Integer> result = new LinkedHashMap<>();
+        for (Map.Entry<Person, Integer> entry : list)
+        {
+            result.put( entry.getKey(), entry.getValue() );
+        }
+        return result;
 	}
 }

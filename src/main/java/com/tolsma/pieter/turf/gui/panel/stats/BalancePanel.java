@@ -1,53 +1,67 @@
 package com.tolsma.pieter.turf.gui.panel.stats;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
+import javax.swing.border.Border;
 
 import com.tolsma.pieter.turf.database.PersonManager;
 import com.tolsma.pieter.turf.gui.MainFrame;
 import com.tolsma.pieter.turf.items.Person;
+import com.tolsma.pieter.turf.listener.CustomMouseListener;
+import com.tolsma.pieter.turf.util.Constants;
 
 public class BalancePanel extends JPanel {
 
 	private GridBagConstraints c;
-
-	private JButton backButton;
 	private Font font;
+
+	private JScrollPane scrollPane;
+	private JPanel container;
+
+	private JButton payButton;
 
 	public BalancePanel(MainFrame mainFrame) {
 
-		this.setLayout(new GridBagLayout());
+		this.setLayout(new BorderLayout());
 		c = new GridBagConstraints();
 
 		font = new Font("Arial", Font.PLAIN, 35);
 
-		backButton = new JButton("Back");
-		backButton.addActionListener(new ActionListener() {
+		payButton = new JButton("Nu afrekenen");
+		payButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.showMain();
+				System.out.println("TODO: Open paypment screen");
 			}
 		});
-		backButton.setFont(font);
+		payButton.setBorderPainted(false);
+		payButton.setOpaque(true);
+		payButton.setBackground(Constants.BLUE);
+		payButton.setFont(font);
+		payButton.addMouseListener(new CustomMouseListener(Constants.BLUE, Constants.BLUE_HIGHLIGHT, payButton));
 
+		container = new JPanel();
+		container.setLayout(new GridBagLayout());
+		scrollPane = new JScrollPane(container);
+
+		scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+		scrollPane.getViewport().putClientProperty("EnableWindowBlit", Boolean.TRUE);
+		scrollPane.getViewport().setScrollMode(JViewport.BACKINGSTORE_SCROLL_MODE);
 		update();
 	}
 
 	public void update() {
 		this.removeAll();
+		container.removeAll();
+		c.gridy = 0;
 		for (Person p : PersonManager.getInstance().getPersons()) {
 			c.gridx = 0;
 			JLabel nameLabel = new JLabel(p.getName());
 			nameLabel.setFont(font);
-			add(nameLabel, c);
+			container.add(nameLabel, c);
 
 			c.gridx++;
 			JLabel balanceLabel = new JLabel("€" + String.valueOf(p.getBalance()));
@@ -57,15 +71,15 @@ public class BalancePanel extends JPanel {
 			} else {
 				balanceLabel.setForeground(Color.GREEN);
 			}
-			add(balanceLabel, c);
+			container.add(balanceLabel, c);
 
 			c.gridy++;
 		}
-
-		c.gridx = 0;
-		c.gridwidth = 2;
-		add(backButton, c);
-		c.gridwidth = 1;
-
+		container.revalidate();
+		scrollPane.revalidate();
+		add(scrollPane, BorderLayout.CENTER);
+		add(payButton, BorderLayout.SOUTH);
+		revalidate();
+		repaint();
 	}
 }

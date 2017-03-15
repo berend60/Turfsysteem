@@ -48,6 +48,7 @@ public class EditPersonsPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				localCopy.add(new Person("", UUID.randomUUID(), 0));
+				System.out.println("HI");
 				update();
 			}
 		});
@@ -64,6 +65,7 @@ public class EditPersonsPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				PersonManager.getInstance().save(localCopy);
 				mainOptions.showMain();
+				mainOptions.update();
 			}
 		});
 
@@ -138,7 +140,6 @@ public class EditPersonsPanel extends JPanel {
 	}
 
 	public void update() {
-		localCopy = PersonManager.getInstance().getPersons();
 		mainOptions.update();
 		this.removeAll();
 		c.gridx = 0;

@@ -87,13 +87,13 @@ public class PersonListPanel extends JPanel {
 	
 	public void update() {
 		this.removeAll();
-
+		persons = PersonManager.getInstance().getPersons();
 		int startIndex = activePage * MAX_PERSONS_SHOWN;
 		int endIndex = startIndex + MAX_PERSONS_SHOWN;
 
 		for (int i = startIndex; i < endIndex; i++) {
 		    if (i >= persons.size()) break;
-		    Person person = persons.get(i);
+		    Person person = PersonManager.getInstance().getPerson(persons.get(i).getId());
 			JButton personButton = new JButton("<html>" + person.getName() + "</html>");
 			personButton.setForeground(Color.WHITE);
 			personButton.setOpaque(true);
@@ -104,7 +104,7 @@ public class PersonListPanel extends JPanel {
 			personButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					PersonManager.getInstance().getPerson(person.getId()).setSelected(!person.isSelected());
+					person.setSelected(!person.isSelected());
 					changeColor(personButton, person);
 				}
 			});

@@ -17,7 +17,7 @@ import com.tolsma.pieter.turf.util.Constants;
 public class DataPanel extends JPanel{
 	
 	private JPanel buttonBar;
-	private JButton statsButton, transactionButton, backButton;
+	private JButton statsButton, transactionButton, balanceButton, backButton;
 	
 	private BalancePanel balancePanel;
 	private TransactionsPanel transactionsPanel;
@@ -31,10 +31,12 @@ public class DataPanel extends JPanel{
 		buttonBar.setPreferredSize(new Dimension(MainFrame.width, 200));
 		
 		statsPanel = new StatisticsPanel();
+		balancePanel = new BalancePanel(mainFrame);
 		transactionsPanel = new TransactionsPanel(mainFrame);
 		
 		statsButton = new JButton("Statistics");
 		transactionButton = new JButton("Transactions");
+		balanceButton = new JButton("Balance");
 		backButton = new JButton("Back");
 		
 		statsButton.setBorderPainted(false);
@@ -46,7 +48,12 @@ public class DataPanel extends JPanel{
 		transactionButton.setBorderPainted(false);
 		transactionButton.setBackground(Constants.TURQUOISE);
 		transactionButton.addMouseListener(new CustomMouseListener(Constants.TURQUOISE, Constants.TURQUOISE_HIGHLIGHT, transactionButton));
-		
+
+		balanceButton.setOpaque(true);
+		balanceButton.setBorderPainted(false);
+		balanceButton.setBackground(Constants.TURQUOISE);
+		balanceButton.addMouseListener(new CustomMouseListener(Constants.TURQUOISE, Constants.TURQUOISE_HIGHLIGHT, balanceButton));
+
 		backButton.setOpaque(true);
 		backButton.setBorderPainted(false);
 		backButton.setBackground(Constants.TURQUOISE);
@@ -67,6 +74,13 @@ public class DataPanel extends JPanel{
 				setView(transactionsPanel);
 			}
 		});
+
+		balanceButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setView(balancePanel);
+			}
+		});
 		
 		backButton.addActionListener(new ActionListener() {
 			@Override
@@ -77,6 +91,7 @@ public class DataPanel extends JPanel{
 		
 		buttonBar.add(statsButton);
 		buttonBar.add(transactionButton);
+		buttonBar.add(balanceButton);
 		buttonBar.add(backButton);
 		
 		setView(transactionsPanel);

@@ -12,13 +12,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerDateModel;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -45,8 +39,6 @@ public class TransactionsPanel extends JPanel {
 	public TransactionsPanel(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
 		this.setLayout(new BorderLayout());
-		scrollPane = new JScrollPane();
-		scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 
 		northContainer = new JPanel();
 		northContainer.setLayout(new GridLayout(1, 3));
@@ -108,8 +100,7 @@ public class TransactionsPanel extends JPanel {
 		northContainer.add(leftButton);
 		northContainer.add(dateSpinner);
 		northContainer.add(rightButton);
-		
-		scrollPane.getVerticalScrollBar().setUnitIncrement(100);
+
 		container = new JPanel();
 		container.setLayout(new GridBagLayout());
 		c = new GridBagConstraints();
@@ -122,6 +113,9 @@ public class TransactionsPanel extends JPanel {
 		removeLabel = new JLabel("Remove");
 
 		scrollPane = new JScrollPane(container);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+		scrollPane.getViewport().putClientProperty("EnableWindowBlit", Boolean.TRUE);
+		scrollPane.getViewport().setScrollMode(JViewport.BACKINGSTORE_SCROLL_MODE);
 		this.add(scrollPane, BorderLayout.CENTER);
 		this.add(northContainer, BorderLayout.NORTH);
 

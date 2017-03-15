@@ -1,21 +1,11 @@
 package com.tolsma.pieter.turf.gui.panel.stats;
 
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.SortedSet;
+import java.util.*;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import com.tolsma.pieter.turf.database.ItemManager;
 import com.tolsma.pieter.turf.database.PersonManager;
@@ -38,6 +28,9 @@ public class StatisticsPanel extends JPanel{
 	private Font nameFont;
 	
 	private JPanel buttonContainer;
+	private JPanel container;
+	private JScrollPane scrollPane;
+
 	private JButton dailyButton, monthlyButton, yearlyButton;
 	private JComboBox categorySelector;
 	private String[] categories = {"Bier", "Speciaalbier", "Fris", "Eten"};
@@ -47,8 +40,7 @@ public class StatisticsPanel extends JPanel{
 	
 	public StatisticsPanel() {
 		
-		this.setLayout(new GridBagLayout());
-		c = new GridBagConstraints();
+		this.setLayout(new BorderLayout());
 		
 		buttonContainer = new JPanel();
 		buttonContainer.setLayout(new GridLayout(1, 4));
@@ -123,17 +115,20 @@ public class StatisticsPanel extends JPanel{
 		nameFont = new Font("Arial", Font.PLAIN, 30);
 		title.setFont(bold);
 
+
+		container = new JPanel();
+		container.setLayout(new GridBagLayout());
+		scrollPane = new JScrollPane(container);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        scrollPane.getViewport().putClientProperty("EnableWindowBlit", Boolean.TRUE);
+        scrollPane.getViewport().setScrollMode(JViewport.BACKINGSTORE_SCROLL_MODE);
+
 		update();
 	}
 	
 	public void update() {
 		this.removeAll();
-		c.weighty = 1.0;
-		c.gridx = 0;
-		c.gridy = 0;
-		c.gridwidth = 2;
-		add(title, c);
-		c.gridy = 1;
+		add(title, BorderLayout.NORTH);
 		
 		dailyButton.setBackground(Constants.TURQUOISE);
 		monthlyButton.setBackground(Constants.TURQUOISE);
@@ -168,30 +163,37 @@ public class StatisticsPanel extends JPanel{
 			break;
 		}
 		
-		add(buttonContainer, c);
-		c.gridwidth = 1;
-		c.gridy++;
-		c.gridx = 0;
+		add(buttonContainer, BorderLayout.NORTH);
+
+		GridBagConstraints c2 = new GridBagConstraints();
+		c2.gridx = 0;
+		c2.gridy = 0;
+		container.removeAll();
 		
-		SortedSet<Map.Entry<Person, Integer>> map = PersonManager.getInstance().getOrderedConsumption(startDate, endDate, currentCategory);
-		Iterator<Map.Entry<Person, Integer>> it = map.iterator();
+		HashMap<Person, Integer> map = PersonManager.getInstance().getOrderedConsumption(startDate, endDate, currentCategory);
+		Iterator<Map.Entry<Person, Integer>> it = map.entrySet().iterator();
 		while(it.hasNext()) {
 			Map.Entry<Person, Integer> res = it.next();
 			Person p = res.getKey();
 			JLabel nameLabel = new JLabel(p.getName());
 			nameLabel.setFont(nameFont);
-			c.gridx = 0;
-			add(nameLabel, c);
+			c2.gridx = 0;
+			container.add(nameLabel, c2);
 			
 			int amount = res.getValue();
 			JLabel amountLabel = new JLabel(amount + " " + currentCategory);
 			amountLabel.setFont(nameFont);
-			c.gridx++;
-			add(amountLabel, c);
+			c2.gridx++;
+			container.add(amountLabel, c2);
 			
-			c.gridy++;
+			c2.gridy++;
 		}
-		
+        scrollPane.revalidate();
+		container.revalidate();
+        container.repaint();
+		scrollPane.repaint();
+		add(scrollPane, BorderLayout.CENTER);
+
 		this.repaint();
 		this.revalidate();
 	}
