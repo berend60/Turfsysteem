@@ -44,15 +44,26 @@ public class StatisticsPanel extends JPanel{
 		
 		buttonContainer = new JPanel();
 		buttonContainer.setLayout(new GridLayout(1, 4));
-		dailyButton = new JButton("Daily");
-		monthlyButton = new JButton("Monthly");
-		yearlyButton = new JButton("Yearly");
+		dailyButton = new JButton("Dag");
+		monthlyButton = new JButton("Maand");
+		yearlyButton = new JButton("Jaar");
 		categorySelector = new JComboBox(categories);
+
+		Font font = new Font("Arial", Font.BOLD, 40);
 		
 		dailyButton.setOpaque(true);
 		monthlyButton.setOpaque(true);
 		yearlyButton.setOpaque(true);
-		
+
+		dailyButton.setForeground(Color.WHITE);
+        monthlyButton.setForeground(Color.WHITE);
+        yearlyButton.setForeground(Color.WHITE);
+
+        dailyButton.setFont(font);
+        monthlyButton.setFont(font);
+        yearlyButton.setFont(font);
+        categorySelector.setFont(font);
+
 		dailyButton.setBorderPainted(false);
 		monthlyButton.setBorderPainted(false);
 		yearlyButton.setBorderPainted(false);

@@ -30,7 +30,7 @@ public class BalancePanel extends JPanel {
 
 		font = new Font("Arial", Font.PLAIN, 35);
 
-		payButton = new JButton("Nu afrekenen");
+		payButton = new JButton("Saldo opwaarderen");
 		payButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -40,7 +40,8 @@ public class BalancePanel extends JPanel {
 		payButton.setBorderPainted(false);
 		payButton.setOpaque(true);
 		payButton.setBackground(Constants.BLUE);
-		payButton.setFont(font);
+		payButton.setFont(new Font("Arial", Font.BOLD, 45));
+		payButton.setForeground(Color.WHITE);
 		payButton.addMouseListener(new CustomMouseListener(Constants.BLUE, Constants.BLUE_HIGHLIGHT, payButton));
 
 		container = new JPanel();

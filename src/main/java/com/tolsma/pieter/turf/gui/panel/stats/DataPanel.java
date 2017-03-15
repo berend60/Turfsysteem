@@ -1,8 +1,6 @@
 package com.tolsma.pieter.turf.gui.panel.stats;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -33,31 +31,41 @@ public class DataPanel extends JPanel{
 		statsPanel = new StatisticsPanel();
 		balancePanel = new BalancePanel(mainFrame);
 		transactionsPanel = new TransactionsPanel(mainFrame);
+
+		Font font = new Font("Arial", Font.BOLD, 40);
 		
-		statsButton = new JButton("Statistics");
-		transactionButton = new JButton("Transactions");
-		balanceButton = new JButton("Balance");
-		backButton = new JButton("Back");
+		statsButton = new JButton("Statistiek");
+		transactionButton = new JButton("Transacties");
+		balanceButton = new JButton("Balans");
+		backButton = new JButton("Terug");
 		
 		statsButton.setBorderPainted(false);
 		statsButton.setOpaque(true);
+		statsButton.setForeground(Color.WHITE);
 		statsButton.setBackground(Constants.TURQUOISE);
 		statsButton.addMouseListener(new CustomMouseListener(Constants.TURQUOISE, Constants.TURQUOISE_HIGHLIGHT, statsButton));
+		statsButton.setFont(font);
 		
 		transactionButton.setOpaque(true);
 		transactionButton.setBorderPainted(false);
 		transactionButton.setBackground(Constants.TURQUOISE);
+		transactionButton.setForeground(Color.WHITE);
 		transactionButton.addMouseListener(new CustomMouseListener(Constants.TURQUOISE, Constants.TURQUOISE_HIGHLIGHT, transactionButton));
+		transactionButton.setFont(font);
 
 		balanceButton.setOpaque(true);
 		balanceButton.setBorderPainted(false);
 		balanceButton.setBackground(Constants.TURQUOISE);
+		balanceButton.setForeground(Color.WHITE);
 		balanceButton.addMouseListener(new CustomMouseListener(Constants.TURQUOISE, Constants.TURQUOISE_HIGHLIGHT, balanceButton));
+		balanceButton.setFont(font);
 
 		backButton.setOpaque(true);
 		backButton.setBorderPainted(false);
 		backButton.setBackground(Constants.TURQUOISE);
+		backButton.setForeground(Color.WHITE);
 		backButton.addMouseListener(new CustomMouseListener(Constants.TURQUOISE, Constants.TURQUOISE_HIGHLIGHT, backButton));
+		backButton.setFont(font);
 		
 		statsButton.addActionListener(new ActionListener() {
 			@Override

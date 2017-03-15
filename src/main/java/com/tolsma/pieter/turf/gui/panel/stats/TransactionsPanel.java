@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 
 import javax.swing.*;
@@ -142,7 +143,8 @@ public class TransactionsPanel extends JPanel {
 		container.add(removeLabel, c);
 
 		ArrayList<Transaction> toBeShown = TransactionManager.getInstance().getTransactionsAt((Date) dateSpinner.getValue());
-		for (Transaction t : toBeShown) {
+        Collections.reverse(toBeShown);
+        for (Transaction t : toBeShown) {
 			SimpleDateFormat fmt = new SimpleDateFormat();
 			JLabel transDate = new JLabel(new SimpleDateFormat("HH:mm:ss").format(t.getDate()));
 			JLabel transPrice = new JLabel("€" + String.valueOf(t.getTotalPrice()));

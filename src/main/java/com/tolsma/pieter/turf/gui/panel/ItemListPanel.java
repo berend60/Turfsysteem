@@ -81,8 +81,20 @@ public class ItemListPanel extends JPanel {
             add(button);
         }
 
-        JButton forwardButton = new JButton("NEXT");
-        JButton previousButton = new JButton("PREV");
+        JButton forwardButton = new JButton("Next");
+        JButton previousButton = new JButton("Prev");
+
+        previousButton.setBorderPainted(false);
+        previousButton.setOpaque(true);
+        previousButton.setBackground(BottomPanel.RED);
+        previousButton.setForeground(Color.white);
+        previousButton.setFont(PersonListPanel.FONT);
+
+        forwardButton.setBorderPainted(false);
+        forwardButton.setOpaque(true);
+        forwardButton.setBackground(BottomPanel.RED);
+        forwardButton.setForeground(Color.WHITE);
+        forwardButton.setFont(PersonListPanel.FONT);
 
         forwardButton.addActionListener(new ActionListener() {
             @Override
