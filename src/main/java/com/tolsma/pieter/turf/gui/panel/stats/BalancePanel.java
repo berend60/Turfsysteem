@@ -9,6 +9,7 @@ import javax.swing.border.Border;
 
 import com.tolsma.pieter.turf.database.PersonManager;
 import com.tolsma.pieter.turf.gui.MainFrame;
+import com.tolsma.pieter.turf.gui.panel.options.DepositPanel;
 import com.tolsma.pieter.turf.items.Person;
 import com.tolsma.pieter.turf.listener.CustomMouseListener;
 import com.tolsma.pieter.turf.util.Constants;
@@ -19,22 +20,25 @@ public class BalancePanel extends JPanel {
 	private Font font;
 
 	private JScrollPane scrollPane;
-	private JPanel container;
+	private JPanel container, depositPanel;
 
 	private JButton payButton;
 
-	public BalancePanel(MainFrame mainFrame) {
+	public BalancePanel(DataPanel dataPanel) {
 
 		this.setLayout(new BorderLayout());
 		c = new GridBagConstraints();
 
 		font = new Font("Arial", Font.PLAIN, 35);
 
+		depositPanel = new DepositPanel();
+
 		payButton = new JButton("Saldo opwaarderen");
 		payButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("TODO: Open paypment screen");
+				dataPanel.setView(depositPanel);
 			}
 		});
 		payButton.setBorderPainted(false);
@@ -79,7 +83,7 @@ public class BalancePanel extends JPanel {
 		container.revalidate();
 		scrollPane.revalidate();
 		add(scrollPane, BorderLayout.CENTER);
-		add(payButton, BorderLayout.SOUTH);
+		add(payButton, BorderLayout.NORTH);
 		revalidate();
 		repaint();
 	}

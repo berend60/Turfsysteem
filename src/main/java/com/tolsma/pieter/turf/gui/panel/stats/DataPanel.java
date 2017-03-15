@@ -29,7 +29,7 @@ public class DataPanel extends JPanel{
 		buttonBar.setPreferredSize(new Dimension(MainFrame.width, 200));
 		
 		statsPanel = new StatisticsPanel();
-		balancePanel = new BalancePanel(mainFrame);
+		balancePanel = new BalancePanel(this);
 		transactionsPanel = new TransactionsPanel(mainFrame);
 
 		Font font = new Font("Arial", Font.BOLD, 40);
@@ -109,6 +109,7 @@ public class DataPanel extends JPanel{
 		transactionsPanel.setDate(new Date());
 		transactionsPanel.updateData();
 		statsPanel.update();
+		balancePanel.update();
 	}
 	
 	public void setView(JPanel view) {

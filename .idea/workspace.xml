@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42847a68-481e-4131-9075-e80659e88929" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/ItemListPanel.java" afterPath="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/ItemListPanel.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/options/DepositPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/BalancePanel.java" afterPath="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/BalancePanel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/DataPanel.java" afterPath="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/DataPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/StatisticsPanel.java" afterPath="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/StatisticsPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/TransactionsPanel.java" afterPath="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/TransactionsPanel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/turfdata/items.json" afterPath="$PROJECT_DIR$/turfdata/items.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/turfdata/persons.json" afterPath="$PROJECT_DIR$/turfdata/persons.json" />
     </list>
@@ -62,11 +61,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TransactionsPanel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TransactionsPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/TransactionsPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="145" column="37" lean-forward="false" selection-start-line="145" selection-start-column="37" selection-end-line="145" selection-end-column="37" />
+            <state relative-caret-position="1170">
+              <caret line="140" column="44" lean-forward="true" selection-start-line="140" selection-start-column="44" selection-end-line="140" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -75,7 +74,7 @@
       <file leaf-file-name="StatisticsPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/StatisticsPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
+            <state relative-caret-position="278">
               <caret line="48" column="40" lean-forward="false" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="40" />
               <folding />
             </state>
@@ -95,11 +94,23 @@
       <file leaf-file-name="DataPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/DataPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="65" column="18" lean-forward="false" selection-start-line="65" selection-start-column="18" selection-end-line="65" selection-end-column="18" />
+            <state relative-caret-position="150">
+              <caret line="31" column="44" lean-forward="false" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
               <folding>
-                <element signature="e#3044#3045#0" expanded="true" />
-                <element signature="e#3076#3077#0" expanded="true" />
+                <element signature="e#3039#3040#0" expanded="true" />
+                <element signature="e#3071#3072#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DepositPanel.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/options/DepositPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="56" column="116" lean-forward="false" selection-start-line="56" selection-start-column="116" selection-end-line="56" selection-end-column="116" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -108,12 +119,10 @@
       <file leaf-file-name="BalancePanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/BalancePanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="32" column="50" lean-forward="false" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
+            <state relative-caret-position="300">
+              <caret line="40" column="34" lean-forward="false" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#956#957#0" expanded="true" />
-                <element signature="e#1015#1016#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -134,16 +143,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="345">
               <caret line="78" column="21" lean-forward="false" selection-start-line="78" selection-start-column="21" selection-end-line="78" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainFrame.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/MainFrame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="25" column="22" lean-forward="true" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -200,12 +199,13 @@
         <option value="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/util/DateHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/options/EditPersonsPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/PersonListPanel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/DataPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/ItemListPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/StatisticsPanel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/BalancePanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/database/TransactionManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/TransactionsPanel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/DataPanel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/BalancePanel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/options/DepositPanel.java" />
       </list>
     </option>
   </component>
@@ -1359,7 +1359,7 @@
       <workItem from="1488379505405" duration="3964000" />
       <workItem from="1488895781034" duration="170000" />
       <workItem from="1489402426600" duration="3672000" />
-      <workItem from="1489609929143" duration="5695000" />
+      <workItem from="1489609929143" duration="6859000" />
     </task>
     <servers />
   </component>
@@ -1396,7 +1396,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29941000" />
+    <option name="totallyTimeSpent" value="31105000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1492,14 +1492,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/turfdata/transactions/9_2017.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/BottomPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
@@ -1863,8 +1855,8 @@
         <state relative-caret-position="302">
           <caret line="56" column="22" lean-forward="false" selection-start-line="56" selection-start-column="22" selection-end-line="56" selection-end-column="22" />
           <folding>
-            <element signature="e#1498#1499#0" expanded="true" />
-            <element signature="e#1523#1524#0" expanded="true" />
+            <element signature="e#1498#1499#0" expanded="false" />
+            <element signature="e#1523#1524#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1898,17 +1890,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/DataPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="65" column="18" lean-forward="false" selection-start-line="65" selection-start-column="18" selection-end-line="65" selection-end-column="18" />
-          <folding>
-            <element signature="e#3044#3045#0" expanded="true" />
-            <element signature="e#3076#3077#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/PersonListPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1290">
@@ -1925,26 +1906,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/StatisticsPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="48" column="40" lean-forward="false" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/BalancePanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="32" column="50" lean-forward="false" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#956#957#0" expanded="true" />
-            <element signature="e#1015#1016#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/database/TransactionManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -1955,9 +1916,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/TransactionsPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="145" column="37" lean-forward="false" selection-start-line="145" selection-start-column="37" selection-end-line="145" selection-end-column="37" />
+        <state relative-caret-position="1170">
+          <caret line="140" column="44" lean-forward="true" selection-start-line="140" selection-start-column="44" selection-end-line="140" selection-end-column="44" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/DataPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="31" column="44" lean-forward="false" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
+          <folding>
+            <element signature="e#3039#3040#0" expanded="true" />
+            <element signature="e#3071#3072#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/BalancePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="40" column="34" lean-forward="false" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/stats/StatisticsPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="48" column="40" lean-forward="false" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tolsma/pieter/turf/gui/panel/options/DepositPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="56" column="116" lean-forward="false" selection-start-line="56" selection-start-column="116" selection-end-line="56" selection-end-column="116" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
