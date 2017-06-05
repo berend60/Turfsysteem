@@ -79,6 +79,43 @@ public class TransactionManager {
 		return result;
 	}
 
+	public ArrayList<Transaction> getTransactionsFromProduct(Date date, UUID productId) {
+        ArrayList<Transaction> res = getTransactionsAt(date);
+
+        ArrayList<Transaction> realRes = new ArrayList<>();
+
+        for (Transaction t: res ){
+            if (t.getItem().getId().equals(productId)) realRes.add(t);
+        }
+        return realRes;
+    }
+
+    public int getCountFromProductPerson(Date date, UUID productId, Person p) {
+        ArrayList<Transaction> res = getTransactionsFromProduct(date, productId);
+        int count = 0;
+        for (Transaction t: res) {
+            if (t.getParticipants().contains(p)) {
+                count += t.getCount() / t.getParticipants().size();
+            }
+        }
+        return count;
+    }
+
+    public int getMonthCountFromProductPerson(Date startDate, Date endDate, UUID productId, Person p) {
+        Calendar cal1 = Calendar.getInstance();
+        Calendar cal2 = Calendar.getInstance();
+        cal1.setTime(startDate);
+        cal2.setTime(endDate);
+
+        int weekDiff = cal2.get(Calendar.WEEK_OF_YEAR) - cal1.get(Calendar.WEEK_OF_YEAR);
+        int count = 0;
+        for (int i = 0; i < weekDiff; i++) {
+            count += getCountFromProductPerson(cal1.getTime(), productId, p);
+            cal1.add(Calendar.WEEK_OF_YEAR, 1);
+        }
+        return count;
+    }
+
 	/**
 	 * Removes a specific transaction from the memory.
 	 * @param transactionId UUID of the transaction you want to remove.

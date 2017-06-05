@@ -15,6 +15,7 @@ public class MainOptionsPanel extends JPanel {
 
 	private JButton editItems;
 	private JButton editUsers;
+	private JButton settings;
 	private JButton backButton;
 	private MainFrame mainFrame;
 
@@ -42,6 +43,18 @@ public class MainOptionsPanel extends JPanel {
 			}
 		});
 		add(editUsers);
+
+		settings = new JButton("Settings");
+		settings.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String choice = JOptionPane.showInputDialog(mainFrame, "Enter password (Level 2 clearance)", "Password", JOptionPane.PLAIN_MESSAGE);
+				if (choice != null && choice.equals(Application.PASSWORD_LEVEL_2))
+					mainFrame.showSettings();
+			}
+		});
+
+		add(settings);
 
 		backButton = new JButton("Back");
 		backButton.addActionListener(new ActionListener() {

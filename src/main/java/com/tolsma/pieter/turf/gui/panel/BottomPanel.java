@@ -42,6 +42,11 @@ public class BottomPanel extends JPanel {
 		turf.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
+				if (PersonManager.getInstance().getSelectedPersons().size() == 0) {
+					JOptionPane.showMessageDialog(mainFrame, "Klik eerst op een persoon en dan op een product om te turfen!");
+				}
+
 				BillManager.getInstance().turf();
 				PersonManager.getInstance().deselectAllPersons();
 				mainFrame.update();

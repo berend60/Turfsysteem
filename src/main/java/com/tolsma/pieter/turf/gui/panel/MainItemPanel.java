@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import com.tolsma.pieter.turf.database.BillManager;
 import com.tolsma.pieter.turf.database.ItemManager;
@@ -34,7 +34,11 @@ public class MainItemPanel extends JPanel {
 		bier.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				for (Person p : PersonManager.getInstance().getSelectedPersons()) {
+				ArrayList<Person> persons = PersonManager.getInstance().getSelectedPersons();
+				if (persons.size() == 0) {
+					JOptionPane.showMessageDialog(rightPanel, "Klik eerst op een persoon!");
+				}
+				for (Person p : persons) {
 					boolean succes = false;
 					for (Transaction itemLabel : BillManager.getInstance().getElements()) {
 						if (itemLabel.getItem().equals(item)) {

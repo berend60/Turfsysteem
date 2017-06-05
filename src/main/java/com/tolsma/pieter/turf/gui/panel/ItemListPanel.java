@@ -51,7 +51,7 @@ public class ItemListPanel extends JPanel {
 	    for (int i = startIndex; i <= endIndex; i++) {
 	        if (i >= items.size()) break;
 	        Item item = items.get(i);
-            JButton button = new JButton("<html>" + item.getName() + " €" + item.getPrice() + "</html>");
+            JButton button = new JButton("<html>" + item.getName() + "</html>");
             button.setOpaque(true);
             button.setBorderPainted(false);
             button.setFont(RightPanel.FONT);

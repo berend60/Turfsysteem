@@ -15,6 +15,7 @@ import com.tolsma.pieter.turf.gui.panel.RightPanel;
 import com.tolsma.pieter.turf.gui.panel.options.EditInventoryPanel;
 import com.tolsma.pieter.turf.gui.panel.options.EditPersonsPanel;
 import com.tolsma.pieter.turf.gui.panel.options.MainOptionsPanel;
+import com.tolsma.pieter.turf.gui.panel.options.SettingsPanel;
 import com.tolsma.pieter.turf.gui.panel.stats.DataPanel;
 
 public class MainFrame extends JFrame {
@@ -105,6 +106,14 @@ public class MainFrame extends JFrame {
 		this.getContentPane().removeAll();
 		dataPanel.update();
 		this.getContentPane().add(dataPanel, BorderLayout.CENTER);
+		this.revalidate();
+		this.repaint();
+	}
+
+	public void showSettings() {
+		this.getContentPane().removeAll();
+		SettingsPanel pan = new SettingsPanel(this);
+		this.getContentPane().add(pan, BorderLayout.CENTER);
 		this.revalidate();
 		this.repaint();
 	}

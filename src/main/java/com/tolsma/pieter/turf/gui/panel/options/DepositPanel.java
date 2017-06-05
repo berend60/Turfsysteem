@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static com.sun.tools.internal.xjc.reader.Ring.add;
 
 /**
  * Created by pietertolsma on 3/15/17.
