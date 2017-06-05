@@ -76,7 +76,7 @@ public class MailJob implements org.quartz.Job {
                 aRowHead.createCell(0).setCellValue(items.get(i).getName());
 
                 for (int k = 0; k < persons.size(); k++) {
-                    int count = TransactionManager.getInstance().getCountFromProductPerson(new Date(), items.get(i).getId(), persons.get(k));
+                    int count = TransactionManager.getInstance().getCountFromProductPerson(date, items.get(i).getId(), persons.get(k));
                     aRowHead.createCell(k + 1).setCellValue(count);
                 }
             }

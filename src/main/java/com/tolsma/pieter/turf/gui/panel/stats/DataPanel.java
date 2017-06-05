@@ -102,7 +102,7 @@ public class DataPanel extends JPanel{
 		buttonBar.add(balanceButton);
 		buttonBar.add(backButton);
 		
-		setView(transactionsPanel);
+		setView(statsPanel);
 	}
 	
 	public void update() {

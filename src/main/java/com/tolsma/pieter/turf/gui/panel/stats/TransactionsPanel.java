@@ -22,6 +22,7 @@ import com.tolsma.pieter.turf.database.TransactionManager;
 import com.tolsma.pieter.turf.gui.MainFrame;
 import com.tolsma.pieter.turf.items.Transaction;
 import com.tolsma.pieter.turf.util.Constants;
+import com.tolsma.pieter.turf.util.DateHelper;
 
 public class TransactionsPanel extends JPanel {
 
@@ -33,7 +34,7 @@ public class TransactionsPanel extends JPanel {
 	
 	private JPanel northContainer;
 	private JSpinner dateSpinner;
-	private JButton leftButton, rightButton;
+	private JButton leftButton, rightButton, exportButton;
 
 	private MainFrame mainFrame;
 	
@@ -47,6 +48,7 @@ public class TransactionsPanel extends JPanel {
 		
 		leftButton = new JButton("<--");
 		rightButton = new JButton("-->");
+		exportButton = new JButton("Export deze week");
 		
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, 2017);
@@ -97,6 +99,21 @@ public class TransactionsPanel extends JPanel {
 				}
 			}
 		});
+
+		exportButton.setOpaque(true);
+		exportButton.setBorderPainted(false);
+		exportButton.setBackground(Constants.TURQUOISE_HIGHLIGHT);
+		exportButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Date current = (Date) dateSpinner.getValue();
+				String choice = JOptionPane.showInputDialog(mainFrame, "Naar welke email moet de data gestuurd worden?", "Email", JOptionPane.PLAIN_MESSAGE);
+				if (choice.contains("@")) {
+					DateHelper.sendBEER(current, new String[]{choice});
+					JOptionPane.showMessageDialog(mainFrame, "De mail wordt nu verzonden!");
+				}
+			}
+		});
 		
 		northContainer.add(leftButton);
 		northContainer.add(dateSpinner);
@@ -119,6 +136,7 @@ public class TransactionsPanel extends JPanel {
 		scrollPane.getViewport().setScrollMode(JViewport.BACKINGSTORE_SCROLL_MODE);
 		this.add(scrollPane, BorderLayout.CENTER);
 		this.add(northContainer, BorderLayout.NORTH);
+		this.add(exportButton, BorderLayout.SOUTH);
 
 		updateData();
 	}
