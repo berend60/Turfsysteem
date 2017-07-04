@@ -97,18 +97,21 @@ public class StatisticsPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				switch (categorySelector.getSelectedIndex()) {
-				case 0:
-					currentCategory = Category.PILS;
-					break;
-				case 1:
-					currentCategory = Category.SPECIAALBIER;
-					break;
-				case 2:
-					currentCategory = Category.FRIS;
-					break;
-				case 3:
-					currentCategory = Category.ETEN;
-					break;
+					case 0:
+						currentCategory = Category.PILS;
+						break;
+					case 1:
+						currentCategory = Category.SPECIAALBIER;
+						break;
+					case 2:
+						currentCategory = Category.FRIS;
+						break;
+					case 3:
+						currentCategory = Category.ETEN;
+						break;
+					default:
+						currentCategory = Category.PILS;
+						break;
 				}
 				update();
 			}

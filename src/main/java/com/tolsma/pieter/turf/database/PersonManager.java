@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -35,7 +37,7 @@ public class PersonManager {
 	}
 
 	public void init() {
-		persons = readFromFile();
+		persons = readPersons();
 	}
 
 	
@@ -44,34 +46,7 @@ public class PersonManager {
 	}
 
 	public ArrayList<Person> getPersons() {
-		return readFromFile();
-	}
-	
-	public void save(ArrayList<Person> newList) {
-		JSONObject main = new JSONObject();
-		JSONArray personsArray = new JSONArray();
-		
-		for (Person p : newList) {
-			JSONObject pObject = new JSONObject();
-			pObject.put("name", p.getName());
-			pObject.put("id", p.getId().toString());
-			pObject.put("balance", String.valueOf(p.getBalance()));
-			personsArray.add(pObject);
-		}
-		main.put("persons", personsArray);
-		
-		try (FileWriter writer = new FileWriter(new File(FILE_PATH))) {
-			writer.write(main.toJSONString());
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		this.persons = newList;
-	}
-	
-	public void save() {
-		save(persons);
+		return readPersons();
 	}
 	
 	public HashMap<Person, Integer> getOrderedConsumption(Date startDate, Date endDate, Category itemCategory) {
@@ -105,38 +80,16 @@ public class PersonManager {
 			p.setSelected(false);
 		}
 	}
-	
-	private ArrayList<Person> readFromFile() {
+
+	private ArrayList<Person> readPersons() {
 		ArrayList<Person> results = new ArrayList<>();
-		JSONParser parser = new JSONParser();
-
-		File file = new File(FILE_PATH);
-		if (!file.exists()) {
-			try{
-				JSONObject obj = new JSONObject();
-				obj.put("persons", new JSONArray());
-				FileWriter writer = new FileWriter(file);
-				writer.write(obj.toJSONString());
-				writer.close();
-			}catch(IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		try (FileReader reader = new FileReader(file)) {
-			Object obj = parser.parse(reader);
-			JSONObject jsonObject = (JSONObject) obj;
-
-			JSONArray names = (JSONArray) jsonObject.get("persons");
-			if (names.isEmpty()) return results;
-			Iterator<JSONObject> it = names.iterator();
-			while (it.hasNext()) {
-				JSONObject obj1 = it.next();
-				Person p = new Person((String) obj1.get("name"), UUID.fromString((String) obj1.get("id")), Float.parseFloat((String) obj1.get("balance")));
+		try {
+			ResultSet set = DatabaseHelper.getDB().query("SELECT * FROM persons");
+			while (set.next()) {
+				Person p = new Person(set.getString("name"), UUID.fromString(set.getString("identifier")), set.getFloat("balance"));
 				results.add(p);
 			}
-
-		} catch (IOException | ParseException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return results;

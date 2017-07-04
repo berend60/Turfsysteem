@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -47,7 +50,7 @@ public class TransactionManager {
 	 * and store them in the transactions variable.
 	 */
 	public void init() {
-		transactions = readFromFile(new Date());
+		transactions = readTransactions();
 	}
 
 	public static TransactionManager getInstance() {
@@ -65,7 +68,7 @@ public class TransactionManager {
 	 * @return list of transactions in that week.
 	 */
 	public ArrayList<Transaction> getTransactionsAt(Date date) {
-		ArrayList<Transaction> result = readFromFile(date);
+		ArrayList<Transaction> result = readTransactions();
 		
 		Iterator<Transaction> it = result.iterator();
 		while(it.hasNext()) {
@@ -121,7 +124,7 @@ public class TransactionManager {
 	 * @param transactionId UUID of the transaction you want to remove.
 	 */
 	public void removeTransaction(UUID transactionId) {
-	    transactions = readFromFile(new Date());
+	    transactions = readTransactions();
 		Iterator<Transaction> it = transactions.iterator();
 		while(it.hasNext()) {
 			Transaction t = it.next();
@@ -135,7 +138,7 @@ public class TransactionManager {
 	}
 
 	public void writeTransaction(Transaction trans) {
-	    transactions = readFromFile(new Date());
+	    transactions = readTransactions();
 	    transactions.add(trans);
 	    overwriteFile();
     }
@@ -177,7 +180,7 @@ public class TransactionManager {
 	}
 	
 	public ArrayList<Transaction> getSpecificTransactions(Date date, Person person, Category itemCategory) {
-		ArrayList<Transaction> results = readFromFile(date);
+		ArrayList<Transaction> results = readTransactions();
 		
 		Iterator<Transaction> it = results.iterator();
 		while(it.hasNext()) {
@@ -189,63 +192,39 @@ public class TransactionManager {
 		return results;
 	}
 
-	/**
-	 * Returns all the transactions from a given week
-	 * @param date date in the week you want the transactions of
-	 * @return list of all transactions
-	 */
-	private ArrayList<Transaction> readFromFile(Date date) {
-		ArrayList<Transaction> results = new ArrayList<>();
-		JSONParser parser = new JSONParser();
-		String filePath = getFilePath(date);
-
-		// Check if the file exists, else create one.
-		File file = new File(filePath);
-		if (!file.exists()) {
-			try {
-				JSONObject obj = new JSONObject();
-				obj.put("transactions", new JSONArray());
-				FileWriter writer = new FileWriter(file);
-				writer.write(obj.toJSONString());
-				writer.close();
-				return results;
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		// Start reading from the week-file.
-		try (FileReader reader = new FileReader(file)) {
-			Object obj = parser.parse(reader);
-			JSONObject jsonObject = (JSONObject) obj;
-
-			JSONArray names = (JSONArray) jsonObject.get("transactions");
-			if (names.isEmpty())
-				return results;
-			Iterator<JSONObject> it = names.iterator();
-			while (it.hasNext()) {
-				JSONObject obj1 = it.next();
-
-				Item item = ItemManager.getInstance().getItem(UUID.fromString((String) obj1.get("item_id")));
-				ArrayList<Person> participants = new ArrayList<>();
-				JSONArray personArray = (JSONArray) obj1.get("participants");
-				Iterator it2 = personArray.iterator();
-				while (it2.hasNext()) {
-					UUID personId = UUID.fromString((String) it2.next());
-					Person person = PersonManager.getInstance().getPerson(personId);
-					participants.add(person);
+	private ArrayList<Transaction> readTransactions() {
+		ArrayList<Transaction> res = new ArrayList<>();
+		try {
+			ResultSet set = DatabaseHelper.getDB().query("SELECT * FROM transactions");
+			while (set.next()) {
+				String[] personUuids = set.getString("participants").split(",");
+				ArrayList<Person> persons = new ArrayList<>();
+				for (int i = 0; i < personUuids.length; i++) {
+					Person p = PersonManager.getInstance().getPerson(UUID.fromString(personUuids[i]));
+					if (p == null) System.out.println("FUUUUUU");
+					persons.add(p);
+				}
+				UUID itemId = UUID.fromString(set.getString("item_identifier"));
+				Item item = ItemManager.getInstance().getItem(itemId);
+				UUID transId = UUID.fromString(set.getString("identifier"));
+				int quantity = set.getInt("total_amount");
+				String dateString = set.getString("created_at");
+				DateFormat smp = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
+				Date date = null;
+				try {
+					date = smp.parse(dateString);
+				} catch (java.text.ParseException e) {
+					e.printStackTrace();
 				}
 
-				if (item != null) {
-					Date date1 = new Date(Long.valueOf((String) obj1.get("created_at")));
-					results.add(new Transaction(item, Integer.valueOf((String) obj1.get("total_amount")), participants, UUID.fromString((String) obj1.get("transaction_id")), date1));
-				}
-			}
+				Transaction t = new Transaction(item, quantity, persons, transId, date);
+				res.add(t);
 
-		} catch (IOException | ParseException e) {
+			}
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		transactions = results;
-		return results;
+
+		return res;
 	}
 }

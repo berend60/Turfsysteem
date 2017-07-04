@@ -24,15 +24,4 @@ public class PersonManagerTest {
         p1 = new Person("Test", personId, 10f);
     }
 
-    @Test
-    public void addPersonToDatabase() {
-        ArrayList<Person> persons = PersonManager.getInstance().getPersons();
-        persons.add(p1);
-
-        PersonManager.getInstance().save(persons);
-        assertEquals("Saved person should be returned as well", p1, PersonManager.getInstance().getPerson(personId));
-
-        persons.remove(p1);
-        PersonManager.getInstance().save(persons);
-    }
 }

@@ -20,7 +20,7 @@ public class DateHelper {
     public static final String user = "virgielonline@gmail.com";
     public static final String password = "434D$3d!@";
 
-    public static String path = Application.DATA_DIR + "/tmp.xls";
+    public static final String path = Application.DATA_DIR + "/tmp.xls";
 	
 	public static int daysBetween(Date d1, Date d2){
         int result = (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));

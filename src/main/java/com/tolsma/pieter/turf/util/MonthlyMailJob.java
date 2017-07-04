@@ -49,9 +49,6 @@ public class MonthlyMailJob implements org.quartz.Job {
         cal2.add(Calendar.WEEK_OF_YEAR, -5);
         files.add(generateFile(cal2.getTime(), cal.getTime()));
 
-        int month = cal.get(Calendar.MONTH);
-        int year = cal.get(Calendar.YEAR);
-
         String timeString = "Week " + cal2.get(Calendar.WEEK_OF_YEAR) + " t/m " + cal.get(Calendar.WEEK_OF_YEAR);
         String message = "Beste Huisgenoot, <br/><br/> Bijgevoegd zit het BEER overzicht van " + timeString + "." +
                 "<br/> Mochten er vragen of opmerkingen zijn, neem dan contact op met Janus. <br/> Lekker gezopen deze week! <br/><br/> Joe, <br/> Turfsysteem" +

@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import com.tolsma.pieter.turf.Application;
 import com.tolsma.pieter.turf.database.BillManager;
+import com.tolsma.pieter.turf.database.DatabaseHelper;
 import com.tolsma.pieter.turf.database.PersonManager;
 import com.tolsma.pieter.turf.gui.MainFrame;
 import com.tolsma.pieter.turf.items.Transaction;
@@ -46,8 +47,11 @@ public class BottomPanel extends JPanel {
 				if (PersonManager.getInstance().getSelectedPersons().size() == 0) {
 					JOptionPane.showMessageDialog(mainFrame, "Klik eerst op een persoon en dan op een product om te turfen!");
 				}
-
-				BillManager.getInstance().turf();
+				if (DatabaseHelper.getDB().isConnected()) {
+					BillManager.getInstance().turf();
+				} else {
+					JOptionPane.showMessageDialog(mainFrame, "TURF MISLUKT! FIX JE WIFI");
+				}
 				PersonManager.getInstance().deselectAllPersons();
 				mainFrame.update();
 			}

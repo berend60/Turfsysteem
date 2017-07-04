@@ -3,25 +3,20 @@ package com.tolsma.pieter.turf;
 import java.io.File;
 import java.util.Date;
 
+import com.tolsma.pieter.turf.database.DatabaseHelper;
 import com.tolsma.pieter.turf.database.ItemManager;
 import com.tolsma.pieter.turf.database.PersonManager;
 import com.tolsma.pieter.turf.database.TransactionManager;
 import com.tolsma.pieter.turf.gui.MainFrame;
+import com.tolsma.pieter.turf.util.DatabaseURLRetriever;
 import com.tolsma.pieter.turf.util.MailJob;
-import com.tolsma.pieter.turf.util.MailService;
 import com.tolsma.pieter.turf.util.MonthlyMailJob;
 import org.quartz.*;
 
 import org.quartz.impl.StdSchedulerFactory;
 import static org.quartz.JobBuilder.*;
-import static org.quartz.TriggerBuilder.*;
-import static org.quartz.SimpleScheduleBuilder.*;
 
 public class Application {
-	
-	private static MainFrame mainFrame;
-	private static MailService mailService;
-	
 	public static final String DATA_DIR = "./turfdata";
 	
 	public static final String PASSWORD_LEVEL_1 = "watexSS9";
@@ -31,6 +26,8 @@ public class Application {
 	public static final String user = "virgielonline@gmail.com";
 	public static final String password = "434D$3d!@";
 
+	public static String databaseURL = "";
+
 
 	public static void main(String[] args) {
 		checkDataFolder();
@@ -39,7 +36,7 @@ public class Application {
 		} catch (SchedulerException e) {
 			e.printStackTrace();
 		}
-		mainFrame = new MainFrame();
+		new MainFrame();
 	}
 	
 	public static void checkDataFolder() {

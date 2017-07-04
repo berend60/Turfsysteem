@@ -31,7 +31,7 @@ public class Transaction {
 		this.quantity = quantity;
 		this.participants = participants;
 		this.id = id;
-		this.date = date;
+		this.date = (Date) date.clone();
 	}
 	
 	public UUID getId() {
@@ -39,7 +39,7 @@ public class Transaction {
 	}
 	
 	public Date getDate() {
-		return date;
+		return (Date) date.clone();
 	}
 	
 	public void addCount() {

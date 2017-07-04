@@ -19,7 +19,7 @@ import com.tolsma.pieter.turf.util.Constants;
 
 public class ItemListPanel extends JPanel {
 
-    private final int MAX_ITEMS_SHOWN = 9;
+    private final static int MAX_ITEMS_SHOWN = 9;
     private int activePage;
     private int pageCapacity;
 

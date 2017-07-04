@@ -1,5 +1,6 @@
 package com.tolsma.pieter.turf.database;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.tolsma.pieter.turf.items.Item;
@@ -23,7 +24,23 @@ public class BillManager {
 	public ArrayList<Transaction> getElements() {
 		return elements;
 	}
-	
+
+	public void turf() {
+		for (Transaction t : elements) {
+
+			String parts = "";
+			for (Person p : t.getParticipants()) {
+				parts += p.getId().toString() + ",";
+			}
+			DatabaseHelper.getDB().statement("INSERT INTO transactions " +
+					"(identifier, item_identifier, created_at, participants, total_amount) " +
+					" VALUES ('" + t.getId() + "', '" + t.getItem().getId() + "', '" + t.getDate().toString() + "', '" +
+					parts + "', " + t.getCount() + ");");
+		}
+
+		elements.clear();
+	}
+	/**
 	public void turf() {
 		for (Transaction item : elements) {
 			ItemManager.getInstance().getItem(item.getItem().getId()).subtractStock(item.getCount());
@@ -33,9 +50,7 @@ public class BillManager {
 			}
 			TransactionManager.getInstance().addTransaction(item);
 		}
-		ItemManager.getInstance().save();
-		PersonManager.getInstance().save();
 		elements.clear();
 	}
-	
+	**/
 }

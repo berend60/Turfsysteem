@@ -7,18 +7,15 @@ import java.awt.Frame;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
-import javax.swing.JScrollPane;
 
 import com.tolsma.pieter.turf.gui.panel.BottomPanel;
 import com.tolsma.pieter.turf.gui.panel.PersonListPanel;
 import com.tolsma.pieter.turf.gui.panel.RightPanel;
-import com.tolsma.pieter.turf.gui.panel.options.EditInventoryPanel;
-import com.tolsma.pieter.turf.gui.panel.options.EditPersonsPanel;
 import com.tolsma.pieter.turf.gui.panel.options.MainOptionsPanel;
 import com.tolsma.pieter.turf.gui.panel.options.SettingsPanel;
 import com.tolsma.pieter.turf.gui.panel.stats.DataPanel;
 
-public class MainFrame extends JFrame {
+public final class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
@@ -30,9 +27,6 @@ public class MainFrame extends JFrame {
 	public static int width, height;
 
 	private DataPanel dataPanel;
-
-	private EditInventoryPanel editInventory;
-	private EditPersonsPanel editPersons;
 
 	public MainFrame() {
 
@@ -47,8 +41,6 @@ public class MainFrame extends JFrame {
 		bottomPanel = new BottomPanel(this);
 		personPanel = new PersonListPanel();
 		dataPanel = new DataPanel(this);
-		editInventory = new EditInventoryPanel(mainOptionsPanel);
-		editPersons = new EditPersonsPanel(mainOptionsPanel);
 
 		this.getContentPane().add(personPanel, BorderLayout.WEST);
 
@@ -81,23 +73,6 @@ public class MainFrame extends JFrame {
 	public void showOptions() {
 		this.getContentPane().removeAll();
 		this.getContentPane().add(mainOptionsPanel, BorderLayout.CENTER);
-		this.revalidate();
-		this.repaint();
-	}
-
-	public void showEditInventory() {
-		this.getContentPane().removeAll();
-		editInventory.update();
-		JScrollPane pane = new JScrollPane(editInventory);
-		this.getContentPane().add(pane, BorderLayout.CENTER);
-		this.revalidate();
-		this.repaint();
-	}
-
-	public void showEditPersons() {
-		this.getContentPane().removeAll();
-		editPersons.update();
-		this.getContentPane().add(editPersons, BorderLayout.CENTER);
 		this.revalidate();
 		this.repaint();
 	}

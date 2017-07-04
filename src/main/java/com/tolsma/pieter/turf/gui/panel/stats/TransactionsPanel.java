@@ -18,6 +18,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import com.tolsma.pieter.turf.Application;
+import com.tolsma.pieter.turf.database.DatabaseHelper;
 import com.tolsma.pieter.turf.database.TransactionManager;
 import com.tolsma.pieter.turf.gui.MainFrame;
 import com.tolsma.pieter.turf.items.Transaction;
@@ -163,7 +164,6 @@ public class TransactionsPanel extends JPanel {
 		ArrayList<Transaction> toBeShown = TransactionManager.getInstance().getTransactionsAt((Date) dateSpinner.getValue());
         Collections.reverse(toBeShown);
         for (Transaction t : toBeShown) {
-			SimpleDateFormat fmt = new SimpleDateFormat();
 			JLabel transDate = new JLabel(new SimpleDateFormat("HH:mm:ss").format(t.getDate()));
 			JLabel transPrice = new JLabel("€" + String.valueOf(t.getTotalPrice()));
 			JLabel transItem = new JLabel(t.getCount() + "x" + t.getItem().getName());
@@ -176,6 +176,7 @@ public class TransactionsPanel extends JPanel {
 					String choice = JOptionPane.showInputDialog(mainFrame, "Enter password (Level 2 clearance)", "Password", JOptionPane.PLAIN_MESSAGE);
 					if (choice.equals(Application.PASSWORD_LEVEL_2)) {
 						TransactionManager.getInstance().removeTransaction(t.getId());
+						DatabaseHelper.getDB().statement("DELETE FROM transactions WHERE identifier='" + t.getId() + "';");
 						updateData();
 					}
 				}

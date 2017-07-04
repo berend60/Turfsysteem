@@ -85,7 +85,7 @@ public class MailService {
         }
     }
 
-    class GMailAuthenticator extends Authenticator {
+    static class GMailAuthenticator extends Authenticator {
         String user;
         String pw;
         public GMailAuthenticator (String username, String password)

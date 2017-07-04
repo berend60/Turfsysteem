@@ -25,7 +25,7 @@ public class PersonListPanel extends JPanel {
 	public final static Color LIGHT_BLUE = new Color(52, 152, 219);
 	public final static Font FONT = new Font("Arial", Font.BOLD, 20);
 
-	private final int MAX_PERSONS_SHOWN = 11;
+	private final static int MAX_PERSONS_SHOWN = 11;
 	private int activePage, pageCapacity;
 	private ArrayList<Person> persons;
 
