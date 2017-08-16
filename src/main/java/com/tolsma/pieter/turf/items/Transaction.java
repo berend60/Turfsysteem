@@ -53,7 +53,15 @@ public class Transaction {
 	public boolean sameParticipants() {
 		return participants.equals(PersonManager.getInstance().getSelectedPersons());
 	}
-	
+
+	public String getParticipantsIDString() {
+		String res = "";
+		for (Person p : participants) {
+			res += p.getId() + ",";
+		}
+		return res;
+	}
+
 	public String getParticipantsString() {
 		String res = "";
 		for (Person p : participants) {

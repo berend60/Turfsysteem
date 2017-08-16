@@ -178,19 +178,6 @@ public class TransactionManager {
 		cal.setTime(date);
 		return file_dir + cal.get(Calendar.WEEK_OF_YEAR) + "_" + cal.get(Calendar.YEAR) + ".json";
 	}
-	
-	public ArrayList<Transaction> getSpecificTransactions(Date date, Person person, Category itemCategory) {
-		ArrayList<Transaction> results = readTransactions();
-		
-		Iterator<Transaction> it = results.iterator();
-		while(it.hasNext()) {
-			Transaction trans = it.next();
-			if (!trans.getItem().getCategory().equals(itemCategory) || !trans.getParticipants().contains(person) || !DateHelper.isInTimeslot(date, trans.getDate())) {
-				it.remove();
-			}
-		}
-		return results;
-	}
 
 	private ArrayList<Transaction> readTransactions() {
 		ArrayList<Transaction> res = new ArrayList<>();

@@ -27,6 +27,20 @@ public class BillManager {
 
 	public void turf() {
 		for (Transaction t : elements) {
+			try {
+				APIHelper.getInstance().postTransaction(t);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		elements.clear();
+	}
+
+
+	/**
+	public void turf() {
+		for (Transaction t : elements) {
 
 			String parts = "";
 			for (Person p : t.getParticipants()) {
@@ -40,6 +54,7 @@ public class BillManager {
 
 		elements.clear();
 	}
+	 **/
 	/**
 	public void turf() {
 		for (Transaction item : elements) {

@@ -39,7 +39,7 @@ public class Person {
 
 		int daysBetween = DateHelper.daysBetween(startDate, endDate);
 		for (int i = 0; i < daysBetween; i++) {
-			ArrayList<Transaction> res = TransactionManager.getInstance().getSpecificTransactions(cal.getTime(), this, itemCategory);
+			ArrayList<Transaction> res = TransactionManager.getInstance().getTransactions();
 			for (Transaction t : res) {
 				int amount = t.getCount() / t.getParticipants().size();
 				count += amount;

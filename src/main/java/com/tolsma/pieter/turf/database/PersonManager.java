@@ -84,7 +84,7 @@ public class PersonManager {
 	private ArrayList<Person> readPersons() {
 		ArrayList<Person> results = new ArrayList<>();
 		try {
-			ResultSet set = DatabaseHelper.getDB().query("SELECT * FROM persons");
+			ResultSet set = DatabaseHelper.getDB().query("SELECT * FROM persons WHERE active=TRUE ORDER BY anciennity ASC");
 			while (set.next()) {
 				Person p = new Person(set.getString("name"), UUID.fromString(set.getString("identifier")), set.getFloat("balance"));
 				results.add(p);

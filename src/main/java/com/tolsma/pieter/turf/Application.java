@@ -31,14 +31,9 @@ public class Application {
 
 	public static void main(String[] args) {
 		checkDataFolder();
-		try {
-			setupScheduler();
-		} catch (SchedulerException e) {
-			e.printStackTrace();
-		}
 		new MainFrame();
 	}
-	
+
 	public static void checkDataFolder() {
 		File dir = new File(DATA_DIR);
 		if (!dir.exists()) {
